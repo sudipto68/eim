@@ -1,0 +1,5 @@
+name = EIM
+description = Extend image module.
+package = User interface
+core = 7.x
+dependencies[] = image
