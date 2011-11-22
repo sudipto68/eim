@@ -4,6 +4,7 @@
  * Extend the image module.
  *
  * Extended functionalities
+ *   Supported entity types are node, comment and taxonomy term.
  *   - Add checkboxes to the content types image field edit form.
  *     - "Alt field required"
  *     - "Title field required"
@@ -28,13 +29,17 @@ function eim_field_info_alter(&$info) {
  *   - "Title field required"
  */
 function eim_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
-  // Uncompressed vesion: eim.module.js
+  if ($form['#field']['module'] != 'image') {
+    return;
+  }
+
+  // Uncompressed version: eim.module.js
   drupal_add_js(drupal_get_path('module', 'eim') . '/js/eim.module.min.js', array('scope' => 'footer'));
-  
+
   $instance = $form['#instance'];
   $settings = $form['#instance']['settings'];
 
-  if ($instance['entity_type'] == 'node') {
+  if ($instance['entity_type'] == 'node' || $instance['entity_type'] == 'comment' || $instance['entity_type'] == 'taxonomy_term') {
     $form['instance']['settings']['alt_field_required'] = array(
       '#type' => 'checkbox',
       '#title' => t('<em>Alt</em> field required'),
@@ -57,7 +62,6 @@ function eim_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id)
         )
       )
     );
-    
   }
 }
 
