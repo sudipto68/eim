@@ -24,14 +24,30 @@ Install
 2) In your Drupal site, enable the module under Administration -> Modules
    (/admin/modules).
 
-3) Add or configure a image field under Administration -> Structure ->
-   Content types -> [type]
-   (admin/structure/types/manage/[type]/fields).
+3) Administer additional checkboxes
 
-   Add the additonal checkboxes
+     Content types
 
-     Check 'Enable Alt field' to see the checkbox 'Alt field required'.
-     Check 'Enable Title field' to see the checkbox 'Title field required'.
+       Configure a image field under Administration -> Structure ->
+       Content types -> [type] -> Manage fields
+       (admin/structure/types/manage/[type]/fields/[image_field_name]).
+
+     Content type comments
+
+       Configure a image field under Administration -> Structure ->
+       Content types -> [type] -> Comment fields
+       (admin/structure/types/manage/[type]/comment/fields/[image_field_name]).
+
+     Taxonomy terms
+
+       Configure a image field under Administration -> Structure -> Taxonomy ->
+       [term name] -> Manage fields
+       (admin/structure/taxonomy/[vocabulary name]/fields/[image_field_name])
+
+     Add the additonal checkboxes
+
+       Check 'Enable Alt field' to see the checkbox 'Alt field required'.
+       Check 'Enable Title field' to see the checkbox 'Title field required'.
 
    Alt field maxlength
 
