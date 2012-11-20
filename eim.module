@@ -39,7 +39,7 @@ function eim_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id)
   $instance = $form['#instance'];
   $settings = $form['#instance']['settings'];
 
-  if ($instance['entity_type'] == 'node' || $instance['entity_type'] == 'comment' || $instance['entity_type'] == 'taxonomy_term') {
+  if ($instance['entity_type'] == 'node' || $instance['entity_type'] == 'comment' || $instance['entity_type'] == 'taxonomy_term' || $instance['entity_type'] == 'field_collection_item') {
     $form['instance']['settings']['alt_field_required'] = array(
       '#type' => 'checkbox',
       '#title' => t('<em>Alt</em> field required'),
@@ -80,11 +80,11 @@ function eim_field_widget_image_image_form_alter(&$element, &$form_state, $conte
 
 /**
  * Element #process callback function.
- * 
+ *
  * Action to
  *   - make alt and title field per content typeas required
  *   - alter the maxlength value of image alt fields for all content types
- * 
+ *
  * @see eim_field_widget_image_image_form_alter()
  */
 function eim_imagefield_widget_process($element, &$form_state, $form) {
@@ -96,8 +96,8 @@ function eim_imagefield_widget_process($element, &$form_state, $form) {
   if ($instance['settings']['title_field_required'] == 1) {
     $element['title']['#required'] = TRUE;
   }
-  
+
   $element['alt']['#maxlength'] = 128;
-  
+
   return $element;
 }
