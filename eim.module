@@ -103,9 +103,11 @@ function eim_imagefield_widget_process($element, &$form_state, $form) {
   }
 
   if ($instance['settings']['alt_field_required'] == 1) {
+    $element['alt']['#title'] .= ' <span class="form-required" title="This field is required.">*</span>';
     $element['alt']['#element_validate'] = array('_eim_required_fields_validate');
   }
   if ($instance['settings']['title_field_required'] == 1) {
+    $element['title']['#title'] .= ' <span class="form-required" title="This field is required.">*</span>';
     $element['title']['#element_validate'] = array('_eim_required_fields_validate');
   }
 
@@ -137,7 +139,7 @@ function _eim_required_fields_validate($element, &$form_state) {
     }
     // Check if field is left emtpy.
     elseif (empty($image_field[$field])) {
-      form_error($element, t('The field !title is required', array('!title' => $element['#title'])));
+      form_error($element, t('The !title field is required', array('!title' => ucwords($field))));
       return;
     }
   }
