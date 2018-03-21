@@ -1,5 +1,6 @@
-name = EIM
-description = Extend image module.
+name = Extended image module (EIM)
+description = Allow Alt and Title tags to be required on image fields.
 package = User interface
-core = 7.x
+backdrop = 1.x
+type = module
 dependencies[] = image

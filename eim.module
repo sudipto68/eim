@@ -34,7 +34,7 @@ function eim_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id)
   }
 
   // Uncompressed version: eim.module.js
-  drupal_add_js(drupal_get_path('module', 'eim') . '/js/eim.module.min.js', array('scope' => 'footer'));
+  backdrop_add_js(backdrop_get_path('module', 'eim') . '/js/eim.module.min.js', array('scope' => 'footer'));
 
   $instance = $form['#instance'];
   $settings = $form['#instance']['settings'];
@@ -47,9 +47,9 @@ function eim_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id)
       '#weight' => $form['instance']['settings']['alt_field']['#weight'] + .1,
       '#states' => array(
         'visible' => array(
-          'input[name="instance[settings][alt_field]"]' => array('checked' => TRUE)
-        )
-      )
+          'input[name="instance[settings][alt_field]"]' => array('checked' => TRUE),
+        ),
+      ),
     );
     $form['instance']['settings']['title_field_required'] = array(
       '#type' => 'checkbox',
@@ -58,9 +58,9 @@ function eim_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id)
       '#weight' => $form['instance']['settings']['title_field']['#weight'] + .1,
       '#states' => array(
         'visible' => array(
-          'input[name="instance[settings][title_field]"]' => array('checked' => TRUE)
-        )
-      )
+          'input[name="instance[settings][title_field]"]' => array('checked' => TRUE),
+        ),
+      ),
     );
   }
 }
@@ -73,7 +73,7 @@ function eim_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id)
  * See http://drupal.org/node/887424
  */
 function eim_field_widget_image_image_form_alter(&$element, &$form_state, $context) {
-  foreach (element_children($element) as $delta){
+  foreach (element_children($element) as $delta) {
     $element[$delta]['#process'][] = 'eim_imagefield_widget_process';
   }
 }
@@ -93,12 +93,12 @@ function eim_imagefield_widget_process($element, &$form_state, $form) {
   // Additional functions to validate field before inserting.
   if (module_exists('insert')) {
     // Expose module settings to Javascript.
-    drupal_add_js(array('eim' => array('altRequired' => $instance['settings']['alt_field_required'])), 'setting');
-    drupal_add_js(array('eim' => array('titleRequired' => $instance['settings']['title_field_required'])), 'setting');
+    backdrop_add_js(array('eim' => array('altRequired' => $instance['settings']['alt_field_required'])), 'setting');
+    backdrop_add_js(array('eim' => array('titleRequired' => $instance['settings']['title_field_required'])), 'setting');
 
     if (($instance['settings']['alt_field_required'] || $instance['settings']['title_field_required'])) {
       // If either the ALT or TITLE field are required, add the Insert validation.
-      drupal_add_js(drupal_get_path('module', 'eim') . '/js/eim.insert.validation.js');
+      backdrop_add_js(backdrop_get_path('module', 'eim') . '/js/eim.insert.validation.js');
     }
   }
 
@@ -131,7 +131,7 @@ function _eim_required_fields_validate($element, &$form_state) {
     // If the image is not there, we do not check for empty values.
     $parents = $element['#parents'];
     $field = array_pop($parents);
-    $image_field = drupal_array_get_nested_value($form_state['input'], $parents);
+    $image_field = backdrop_array_get_nested_value($form_state['input'], $parents);
     // We check for the array key, so that it can be NULL (like if the user
     // submits the form without using the "upload" button).
     if (!array_key_exists($field, $image_field)) {

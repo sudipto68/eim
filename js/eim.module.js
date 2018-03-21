@@ -4,7 +4,7 @@
  */
 
 (function ($) {
-  Drupal.behaviors.initEim = {
+  Backdrop.behaviors.initEim = {
     attach: function(context, settings) {
       // Administer content types image fields:
       // Make sure the required fields are disabled 
