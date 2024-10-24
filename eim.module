@@ -132,12 +132,9 @@ function _eim_required_fields_validate($element, &$form_state) {
     $parents = $element['#parents'];
     $field = array_pop($parents);
     $image_field = backdrop_array_get_nested_value($form_state['input'], $parents);
-    if ($image_field == NULL) {
-      $image_field = array();
-    }
     // We check for the array key, so that it can be NULL (like if the user
     // submits the form without using the "upload" button).
-    if (!array_key_exists($field, $image_field)) {
+    if (!is_array($image_field) || !array_key_exists($field, $image_field)) {
       return;
     }
     // Check if field is left emtpy.
